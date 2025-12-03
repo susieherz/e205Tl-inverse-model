@@ -341,12 +341,13 @@ mtext(side=3,line=2.5,paste(accept_frac,"%"),at=max(current_dataset$time),col=if
 mtext(side=3,line=1.5,"avg psrf:",at=min(current_dataset$time),adj=0,cex=0.8)
 mtext(side=3,line=1.5,paste(avg_psrf),at=max(current_dataset$time),col=if(avg_psrf<=1.1){"green4"} else if((avg_psrf>1.1)&(avg_psrf<=1.2)){"orange"} else{"red"},adj=1,cex=0.8)
 
-plot(Nsw_quant_out[,50]~time_seq,xlim=c(0, max(current_dataset$time)), cex=0,axes=F,xlab="",ylab="")
-polygon(c(time_seq,rev(time_seq)),c((Nsw_quant_out[,16]),rev(Nsw_quant_out[,84])),border=F,col="grey80")
-lines(Nsw_quant_out[,50]~time_seq,col="black")
+pM_Tl <- (Nsw_quant_out/1.35e21)*1e12
+plot(pM_Tl[,50]~time_seq,xlim=c(0, max(current_dataset$time)), cex=0,axes=F,xlab="",ylab="")
+polygon(c(time_seq,rev(time_seq)),c((pM_Tl[,16]),rev(pM_Tl[,84])),border=F,col="grey80")
+lines(pM_Tl[,50]~time_seq,col="black")
 axis(side=2,tck=-0.02,mgp=c(3,0.5,0),las=1)
 axis(side=1,tck=-0.02,mgp=c(3,0.5,0),las=1,labels=NA)
-mtext(expression(italic("N"[sw])*" [mol]"),side=2,line=2.5,cex=0.9)
+mtext(expression(italic("N"[sw])*" (pM)"),side=2,line=2.5,cex=0.9)
 box(lwd=1)
 
 Fmnoxide_quant_out=(K.mnoxide*(1-10^fanox_quant_out))/(10^fanox_quant_out*K.anox + K.mnoxide*(1-10^fanox_quant_out) + K.basalt)
